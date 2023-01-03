@@ -1,30 +1,23 @@
-import pkg, { getRickAndMortyCharactersByIds } from "./server.cjs";
-const { getRickAndMortyCharacters, getRickAndMortyCharactersById } = pkg;
+const express = require("express");
+const { authPage, authCourse } = require("./middlewares");
 
-// * https://rickandmortyapi.com/documentation
+const app = express();
 
-/*
- **
- * node-rest-client
- **
-let client = new Client();
-client.get("https://rickandmortyapi.com/api/character/2", (data, response) => {
-  console.log(
-    `Name: ${data.name} - Species: ${data.species} - Gender: ${data.gender} - Status: ${data.status} - Image: ${data.image}`
-  );
+app.use(express.json());
+
+app.get("/home", (req, res) => {
+  res.json("HOME_PAGE");
 });
- */
 
-let args = [8, 15, 19];
+app.get("/course/grades", authPage(["teacher", "admin"]), (req, res) => {
+  res.json({ pedro: 100, paulo: 95, leo: 34, colin: 67 });
+});
 
-// getRickAndMortyCharactersById(1);
-// getRickAndMortyCharactersByIds.apply(null, args);
+app.get("/course/:number", authCourse, (req, res) => {
+  const courseNumber = req.params.number;
+  res.json(`YOU HAVE PERMISSION TO SEE COURSE ${courseNumber}`);
+});
 
-(() => {
-  console.log(`Promise.all:`);
-  Promise.all([
-    getRickAndMortyCharactersById(1),
-    getRickAndMortyCharactersByIds.apply(null, args),
-    getRickAndMortyCharacters(),
-  ]);
-})();
+app.listen(3001, () => {
+  console.log("SERVER RUNNING ON PORT 3001");
+});
