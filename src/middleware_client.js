@@ -63,7 +63,7 @@ const charNames = ["Loggins", "The Shapeshiftress", "Jamey"];
 const getCharacterInfo = () => {
   fetchCharacterInfo(["Loggins", "The Shapeshiftress", "Jamey"]).then(
     (charInfo) => {
-      console.log(JSON.stringify(charInfo));
+      console.log(`getCharacterInfo -> ${JSON.stringify(charInfo)}`);
     }
   );
 };

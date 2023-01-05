@@ -70,28 +70,28 @@ const fetchRAMCharacterId = async (charName) => {
 // TODO: fetchRAMCharacterId version rickmortyapi
 
 // Function to fetch RickAndMorty info of a character.
-const fetchRickAndMortyInfo = async (url) => {
-  console.log(`Fetching ${url}`);
-  let client = new Client();
-  // TODO: Usar https://github.com/afuh/rick-and-morty-api-node filtrando por character name
-  client.get(url, (data, response) => {
-    if (response && response.statusCode === 200) {
-      console.log(`data.results: ${data.results[0].name}`);
-      /* const jsonData = JSON.stringify(data.results);
-      const resultsJSON = JSON.parse(jsonData);
-      console.log(`response: ${resultsJSON}`); */
-      return {
-        name: data.results[0].name,
-        species: data.results[0].species,
-        gender: data.results[0].gender,
-        status: data.results[0].status,
-        image: data.results[0].image,
-      };
-    } else {
-      console.log(`ERROR: failed to query ${charName}'s id.`);
-      return resolve({});
-    }
-  });
+const fetchRickAndMortyInfo = async (charName) => {
+  console.log(`Fetching ${charName} info.`);
+
+  const characterInfo = await getCharacters({ name: `${charName}` });
+  console.log(
+    `fetchRickAndMortyInfo -> ${charName} info: ${JSON.stringify({
+      name: characterInfo.data.results[0].name,
+      species: characterInfo.data.results[0].species,
+      gender: characterInfo.data.results[0].gender,
+      status: characterInfo.data.results[0].status,
+      image: characterInfo.data.results[0].image,
+    })}`
+  );
+  return {
+    name: characterInfo.data.results[0].name,
+    species: characterInfo.data.results[0].species,
+    gender: characterInfo.data.results[0].gender,
+    status: characterInfo.data.results[0].status,
+    image: characterInfo.data.results[0].image,
+  };
+
+  // TODO 20230105: Usar https://github.com/afuh/rick-and-morty-api-node filtrando por character name en lugar de client.get()
 };
 
 // Iterates all characters and returns their RickAndMorty info.
@@ -100,9 +100,8 @@ const fetchCharacterInfo = (characterNames) => {
   const requests = characterNames.map((charName) => {
     console.log(`Searching for character: ${charName}`);
     const url = `https://rickandmortyapi.com/api/character/?name=${charName}`;
-    return fetchRickAndMortyInfo(url).then((results) => {
-      console.log(`charInfo: ${results}`);
-      return results;
+    return fetchRickAndMortyInfo(charName).then((a) => {
+      return a;
     });
   });
   return Promise.all(requests);
