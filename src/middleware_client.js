@@ -22,7 +22,7 @@ client.get("https://rickandmortyapi.com/api/character/2", (data, response) => {
 });
  */
 
-let args = [8, 15, 19];
+// let args = [8, 15, 19];
 
 // getRickAndMortyCharactersById(1);
 // getRickAndMortyCharactersByIds.apply(null, args);
@@ -39,13 +39,14 @@ let args = [8, 15, 19];
 // Promise then/catch
 // fetchRAMCharacterId("Space Cruiser").then((response) => console.log(response));
 
+// ! RELEASE
 // Async/Await
-const getSpaceCruiserId = async () => {
+/* const getSpaceCruiserId = async () => {
   const spaceCruiserId = await fetchRAMCharacterId("Space Cruiser");
   const jsonData = JSON.stringify(spaceCruiserId);
   console.log(`Space Cruiser Id: ${jsonData}`);
 };
-getSpaceCruiserId();
+getSpaceCruiserId(); */
 
 /* const getCharacterInfo = async () => {
   const charInfo = await fetchCharacterInfo([
@@ -58,7 +59,8 @@ getSpaceCruiserId();
 };
 getCharacterInfo(); */
 
-const charNames = ["Loggins", "The Shapeshiftress", "Jamey"];
+// ! RELEASE
+/* const charNames = ["Loggins", "The Shapeshiftress", "Jamey"];
 
 const getCharacterInfo = () => {
   fetchCharacterInfo(["Loggins", "The Shapeshiftress", "Jamey"]).then(
@@ -67,4 +69,6 @@ const getCharacterInfo = () => {
     }
   );
 };
-getCharacterInfo.apply(null, charNames);
+getCharacterInfo.apply(null, charNames); */
+
+getRickAndMortyCharacters()

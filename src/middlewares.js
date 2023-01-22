@@ -4,9 +4,17 @@ var Client = require("node-rest-client").Client;
 const getRickAndMortyCharacters = async () => {
   const response = await getCharacters({ page: 1 });
   response.data.results.map((char) => {
-    console.log(
+    /* console.log(
       `rickmortyapi example: Name: ${char.name} - Species: ${char.species} - Gender: ${char.gender} - Status: ${char.status} - Image: ${char.image}`
-    );
+    ); */
+    console.log([{
+      name: char.name,
+      status: char.status,
+      gender: char.gender,
+      image: char.image,
+      url: char.url,
+      created: char.created
+    }]);
   });
 };
 
