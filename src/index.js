@@ -1,18 +1,33 @@
 const express = require("express");
-const { authPage, authCourse, getRickAndMortyCharacters } = require("./middlewares");
+const cors = require("cors");
+
+const {
+  authPage,
+  authCourse,
+  getRickAndMortyCharacters,
+} = require("./middlewares");
 
 const app = express();
-
+app.use(cors());
 app.use(express.json());
 
-app.get("/home", (req, res) => {
-  res.json("HOME_PAGE");
+app.get("/", (req, res) => {
+  res.send({ status: "Well done!" });
 });
 
-app.get('/characters', (req, res) => {
-  const rickAndMortyChs = getRickAndMortyCharacters()
-  res.json(JSON.stringify(rickAndMortyChs))
-})
+app.get("/test", (req, res) => {
+  res.send({ status: "Well done!" });
+});
+
+app.get("/home", (req, res) => {
+  let hp = "HOME_PAGE";
+  res.json({ hp });
+});
+
+app.get("/characters", (req, res) => {
+  const rickAndMortyChs = getRickAndMortyCharacters();
+  res.json(JSON.stringify(rickAndMortyChs));
+});
 
 app.get("/course/grades", authPage(["teacher", "admin"]), (req, res) => {
   res.json({ pedro: 100, paulo: 95, leo: 34, colin: 67 });
