@@ -7,14 +7,16 @@ const getRickAndMortyCharacters = async () => {
     /* console.log(
       `rickmortyapi example: Name: ${char.name} - Species: ${char.species} - Gender: ${char.gender} - Status: ${char.status} - Image: ${char.image}`
     ); */
-    console.log([{
-      name: char.name,
-      status: char.status,
-      gender: char.gender,
-      image: char.image,
-      url: char.url,
-      created: char.created
-    }]);
+    console.log([
+      {
+        name: char.name,
+        status: char.status,
+        gender: char.gender,
+        image: char.image,
+        url: char.url,
+        created: char.created,
+      },
+    ]);
   });
 };
 

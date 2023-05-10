@@ -1,3 +1,5 @@
+const basicGitHubLogger = require("./modules/GitHubRetriever");
+
 const {
   getRickAndMortyCharactersByIds,
   getRickAndMortyCharacters,
@@ -71,4 +73,6 @@ const getCharacterInfo = () => {
 };
 getCharacterInfo.apply(null, charNames); */
 
-getRickAndMortyCharacters()
+getRickAndMortyCharacters();
+
+basicGitHubLogger();
